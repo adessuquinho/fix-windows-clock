@@ -26,7 +26,9 @@ echo Starting time service...
 net start w32time
 
 echo Configuring trusted NTP servers...
-w32tm /config /manualpeerlist:"a.ntp.br,0x9 time.google.com,0x9" /syncfromflags:manual /reliable:no /update
+REM Using global NTP servers: pool.ntp.org (primary), time.google.com (secondary), time.cloudflare.com (tertiary)
+REM To use different servers, modify the list below and replace with your preferred servers
+w32tm /config /manualpeerlist:"pool.ntp.org,0x9 time.google.com,0x9 time.cloudflare.com,0x9" /syncfromflags:manual /reliable:no /update
 
 echo Forcing synchronization...
 w32tm /resync /force
